@@ -1,0 +1,32 @@
+﻿@model Movie_Rental.ViewModels.ViewMovieForm
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Movie Form</h1>
+
+@using (Html.BeginForm("Save", "Movies"))
+{
+    <div class="form-group col-sm-4">
+        @Html.LabelFor(m => m.Movie.Name, new { @class = "form-label mt-4"})
+        @Html.TextBoxFor(m => m.Movie.Name, new { @class = "form-control", @placeholder="Enter Name"})
+    </div>
+    <div class="form-group col-sm-4">
+        @Html.LabelFor(m => m.Movie.ReleaseDate, new { @class = "form-label mt-4"})
+        @Html.TextBoxFor(m => m.Movie.ReleaseDate, "{0:dd/MM/yyyy}", new { @class = "form-control", @placeholder="DD/MM/YYYY"})
+    </div>
+    <div class="form-group col-sm-4">
+        @Html.LabelFor(m => m.Movie.GenreId, new { @class = "form-label mt-4"})
+        @Html.DropDownListFor(m => m.Movie.GenreId, new SelectList(Model.Genres, "Id", "GenreType"), "Select Genre Type", new { @class = "form-control" })
+    </div>
+    <div class="form-group col-sm-4">
+        @Html.LabelFor(m => m.Movie.NumberInStock, new { @class = "form-label mt-4"})
+        @Html.TextBoxFor(m => m.Movie.NumberInStock, new { @class = "form-control", @placeholder="Enter a number"})
+    </div>
+    @Html.HiddenFor(m => m.Movie.Id)
+    @Html.HiddenFor(m => m.Movie.DateAdded)
+    <p></p>
+    <button type"sumbit" class="btn btn-primary">Save</button>
+    
+}

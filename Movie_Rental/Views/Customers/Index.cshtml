@@ -1,0 +1,31 @@
+﻿@model List<Movie_Rental.Models.Customer>
+@{
+    ViewData["Title"] = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+<p>
+    @Html.ActionLink("New Customer", "CustomerForm", new Customer {Id = 0}, new { @class = "btn btn-secondary" })
+</p>
+@if (Model.Count == 0)
+{
+    <p>No one has rented thos movie before.</p>
+}
+else
+{
+    <table class="table table-hover">
+        <tr class="table-dark">
+            <th scope="row"><h3>Customer</h3></th>
+            <th scope="row"><h3>Membership Type</h3></th>
+        </tr>   
+        @foreach (var customer in Model)
+        {
+            <tr class="table-active">
+                <td>@Html.ActionLink(@customer.Name, "CustomerForm", new{ customer.Id })</td>
+                <td>@customer.MembershipType.Name</td>
+            </tr>
+        }
+
+    </table>
+}

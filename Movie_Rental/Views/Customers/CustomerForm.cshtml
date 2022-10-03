@@ -1,0 +1,33 @@
+﻿@model Movie_Rental.ViewModels.ViewCustomerForm
+@{
+    ViewData["Title"] = "Customer Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Customer Form</h1>
+
+@using (Html.BeginForm("Save", "Customers"))
+{
+    <div class="form-group col-sm-4">
+        @Html.LabelFor(m => m.Customer.Name, new { @class = "form-label mt-4"})
+        @Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control", @placeholder="Enter Name"})
+        @Html.ValidationMessageFor(m => m.Customer.Name)
+    </div>
+    <div class="form-group col-sm-4">
+        @Html.LabelFor(m => m.Customer.DateOfBirth, new { @class = "form-label mt-4"})
+        @Html.TextBoxFor(m => m.Customer.DateOfBirth, "{0:dd/MM/yyyy}", new { @class = "form-control", @placeholder="DD/MM/YYYY"})
+    </div>
+    <div class="form-group col-sm-4">
+        @Html.LabelFor(m => m.Customer.MembershipTypeId, new { @class = "form-label mt-4"})
+        @Html.DropDownListFor(m => m.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membership Type", new { @class = "form-control" })
+    </div>
+    <div class="checkbox">
+        <label class="form-label mt-4">
+            @Html.CheckBoxFor(m => m.Customer.IsSubsribedToNewsletter) Subscribed to Newsletter
+        </label> 
+    </div>
+    @Html.HiddenFor(m => m.Customer.Id)
+    <p></p>
+    <button type"sumbit" class="btn btn-primary">Save</button>
+    
+}
